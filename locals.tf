@@ -8,5 +8,5 @@ EOF
 service docker restart
 EODATA
 
-  user_data = join("\n", [var.user_data, local.user_data_ecs])
+  user_data = join("\n", ["#!/bin/bash", var.user_data, local.user_data_ecs])
 }
