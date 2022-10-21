@@ -1,10 +1,3 @@
-data "template_file" "user_data" {
-  template = file("${path.module}/user_data.sh.tpl")
-
-  vars = {
-    cluster_name = "${var.name}-${var.env}-ecs-cluster"
-  }
-}
 
 resource "aws_security_group" "sg" {
   name        = "${var.name}-${var.env}-ecs-sg"
@@ -52,7 +45,7 @@ resource "aws_launch_template" "ecs-launch-template" {
 
   vpc_security_group_ids = [ aws_security_group.sg.id ]
 
-  user_data = base64encode(data.template_file.user_data.rendered)
+  user_data = base64encode(local.user_data)
 }
 
 resource "aws_autoscaling_group" "cluster" {
