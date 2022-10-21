@@ -1,4 +1,4 @@
-local {
+locals {
   user_data_ecs = <<EODATA
 
 cat >>/etc/ecs/ecs.config <<EOF
