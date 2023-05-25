@@ -43,7 +43,8 @@ resource "aws_iam_role_policy" "cluster-ecs-policy" {
       "Effect": "Allow",
       "Action": [
         "kms:Decrypt",
-        "kms:Encrypt"
+        "kms:Encrypt",
+        "ecs:*"
       ],
       "Resource": "*"
     }

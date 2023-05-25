@@ -10,10 +10,10 @@ module "ecs_with_alb" {
   max_size = 3
   min_size = 0
   ssh_key_name = "aws"
-  subnets = [ "subnet-094951b0b882e2fe6", "subnet-09750086bac6e9a0c"]
+  subnets = [ "subnet-0d67f4d93f5e27883", "subnet-0ca61965a1d6c9ac5" ]
   volume_type = "gp2"
   volume_size = "40"
-  vpc_id = "vpc-0dbafb9961957de28"
+  vpc_id = "vpc-0c4af4912f33a62b1"
 
   container_definitions = jsonencode([
     {
