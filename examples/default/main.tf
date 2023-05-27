@@ -1,4 +1,19 @@
 
+resource "aws_key_pair" "deployer" {
+  key_name   = "aws"
+  public_key = var.ssh_public_key
+}
+
+data "aws_vpc" "vpc" {
+  default = true
+}
+
+data "aws_subnets" "subnets" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.vpc.id]
+  }
+}
 
 module "ecs_with_alb" {
   source = "../.."
@@ -10,10 +25,10 @@ module "ecs_with_alb" {
   max_size = 3
   min_size = 0
   ssh_key_name = "aws"
-  subnets = [ "subnet-0d67f4d93f5e27883", "subnet-0ca61965a1d6c9ac5" ]
+  subnets = [ data.aws_subnets.subnets.ids[0], data.aws_subnets.subnets.ids[1] ]
   volume_type = "gp2"
   volume_size = "40"
-  vpc_id = "vpc-0c4af4912f33a62b1"
+  vpc_id = data.aws_vpc.vpc.id
 
   container_definitions = jsonencode([
     {
