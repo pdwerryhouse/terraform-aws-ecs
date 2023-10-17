@@ -22,6 +22,7 @@ image into them
 
 ## Example
 
+```hcl
 module "ecs_with_alb" {
   source = "../.."
 
@@ -54,4 +55,4 @@ module "ecs_with_alb" {
   ])
 
 }
-
+```
